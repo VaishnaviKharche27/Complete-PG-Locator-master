@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAllProperties, deleteResidency } from "../../utils/api";
+import "./Admin.css";
 
 const AdminPage = () => {
   const [residencies, setResidencies] = useState([]);
@@ -29,27 +30,104 @@ const AdminPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto my-8">
-      <h1 className="text-3xl font-semibold mb-4 text-white">Admin Page</h1>
-      <table className="min-w-full bg-white border border-gray-300 shadow-md">
+    <div style={{ margin: "2rem auto", maxWidth: "800px" }}>
+      <h1
+        style={{
+          fontSize: "1.875rem",
+          fontWeight: "600",
+          marginBottom: "1rem",
+          color: "#FFF",
+        }}
+      >
+        Admin Page
+      </h1>
+      <table
+        style={{
+          width: "100%",
+          borderCollapse: "collapse",
+          backgroundColor: "#FFF",
+          border: "1px solid #D1D5DB",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+      >
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b">Title</th>
-            <th className="py-2 px-4 border-b">Description</th>
-            <th className="py-2 px-4 border-b">Price</th>
-            <th className="py-2 px-4 border-b">Actions</th>
+            <th
+              style={{
+                padding: "0.5rem 1rem",
+                borderBottom: "1px solid #D1D5DB",
+              }}
+            >
+              Title
+            </th>
+            <th
+              style={{
+                padding: "0.5rem 1rem",
+                borderBottom: "1px solid #D1D5DB",
+              }}
+            >
+              Description
+            </th>
+            <th
+              style={{
+                padding: "0.5rem 1rem",
+                borderBottom: "1px solid #D1D5DB",
+              }}
+            >
+              Price
+            </th>
+            <th
+              style={{
+                padding: "0.5rem 1rem",
+                borderBottom: "1px solid #D1D5DB",
+              }}
+            >
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody>
           {residencies.map((residency) => (
             <tr key={residency.id}>
-              <td className="py-2 px-4 border-b">{residency.title}</td>
-              <td className="py-2 px-4 border-b">{residency.description}</td>
-              <td className="py-2 px-4 border-b">{residency.price}</td>
-              <td className="py-2 px-4 border-b">
+              <td
+                style={{
+                  padding: "0.5rem 1rem",
+                  borderBottom: "1px solid #D1D5DB",
+                }}
+              >
+                {residency.title}
+              </td>
+              <td
+                style={{
+                  padding: "0.5rem 1rem",
+                  borderBottom: "1px solid #D1D5DB",
+                }}
+              >
+                {residency.description}
+              </td>
+              <td
+                style={{
+                  padding: "0.5rem 1rem",
+                  borderBottom: "1px solid #D1D5DB",
+                }}
+              >
+                {residency.price}
+              </td>
+              <td
+                style={{
+                  padding: "0.5rem 1rem",
+                  borderBottom: "1px solid #D1D5DB",
+                }}
+              >
                 <button
                   onClick={() => handleDeleteResidency(residency.id)}
-                  className="bg-red-500 text-white py-1 px-2 rounded"
+                  style={{
+                    backgroundColor: "#EF4444",
+                    color: "#FFF",
+                    padding: "0.25rem 0.5rem",
+                    borderRadius: "0.25rem",
+                    cursor: "pointer",
+                  }}
                 >
                   Delete
                 </button>
