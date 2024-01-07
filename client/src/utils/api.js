@@ -196,3 +196,39 @@ export const deleteResidency = async (residencyId) => {
     throw error;
   }
 };
+
+export const updateResidency = async (residencyId, data) => {
+  try {
+    const response = await api.put(`/residency/update/${residencyId}`, {
+      data: {
+        title: data.title,
+        description: data.description,
+        price: parseFloat(data.price),
+        address: data.address,
+        country: data.country,
+        city: data.city,
+        facilities: data.facilities,
+        image: data.image,
+        userEmail: data.userEmail,
+        owner: { connect: { email: data.userEmail } }, // Connect with the new owner based on email
+      },
+    }, 
+    
+    //  {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // }
+    );
+
+    if (response.status === 400 || response.status === 500) {
+      throw response.data;
+    }
+
+    return response.data;
+  } catch (error) {
+    toast.error("Something went wrong while updating residency");
+    throw error;
+  }
+};
+
