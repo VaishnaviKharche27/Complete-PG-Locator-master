@@ -1,3 +1,4 @@
+// Import the necessary dependencies
 import React, { useContext, useState } from "react";
 import { Modal, Button } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
@@ -6,6 +7,7 @@ import UserDetailContext from "../../context/UserDetailContext.js";
 import { bookVisit } from "../../utils/api.js";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
+
 const BookingModal = ({ opened, setOpened, email, propertyId }) => {
   const [value, setValue] = useState(null);
   const {
@@ -32,7 +34,14 @@ const BookingModal = ({ opened, setOpened, email, propertyId }) => {
   const { mutate, isLoading } = useMutation({
     mutationFn: () => bookVisit(value, propertyId, email, token),
     onSuccess: () => handleBookingSuccess(),
-    onError: ({ response }) => toast.error(response.data.message),
+    // Update the error handling to display a specific message for bookedBedrooms limit
+    onError: (error) => {
+      if (error?.response?.status === 400) {
+        toast.error("Booking failed: " + error.response.data.message);
+      } else {
+        toast.error("Something went wrong, Please try again");
+      }
+    },
     onSettled: () => setOpened(false),
   });
 
